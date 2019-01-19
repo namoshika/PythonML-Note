@@ -10,6 +10,11 @@ numpy = "*"
 scipy = "*"
 pandas = "*"
 tensorflow-gpu = "*"
+scikit-learn = "*"
+pillow = "*"
+mglearn = "*"
+pydotplus = "*"
+graphviz = "*"
 
 [dev-packages]
 
