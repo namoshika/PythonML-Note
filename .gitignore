@@ -12,5 +12,6 @@
 # End of https://www.gitignore.io/api/jupyternotebook
 introduction_to_ml_with_python-master/
 cache/
+extra/
 
 /book/
