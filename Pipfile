@@ -15,6 +15,7 @@ pillow = "*"
 mglearn = "*"
 pydotplus = "*"
 graphviz = "*"
+ja-ginza-nopn = {file = "https://github.com/megagonlabs/ginza/releases/download/v1.0.2/ja_ginza_nopn-1.0.2.tgz"}
 
 [dev-packages]
 
