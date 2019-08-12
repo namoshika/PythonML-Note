@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 jupyterlab = "*"
 matplotlib = "*"
-numpy = "*"
+numpy = "==1.16.2"
 scipy = "*"
 pandas = "*"
 tensorflow-gpu = "*"
