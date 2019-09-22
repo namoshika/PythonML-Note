@@ -20,22 +20,23 @@ ENV LC_ALL=ja_JP.UTF-8
 
 # install pyenv
 ENV PATH=/root/.pyenv/bin:$PATH
-COPY .build/init.sh /root/
-RUN curl https://pyenv.run | bash && cat /root/init.sh >> ~/.bashrc
+COPY .build/init.sh .build/start.sh /root/
+RUN curl https://pyenv.run | bash && cat /root/init.sh >> ~/.bashrc && chmod a+x /root/start.sh
 
 # install python
 ENV PY_VER=3.7.3
 RUN . /root/init.sh \
     && pyenv update \
     && pyenv install $PY_VER \
-    && pyenv global $PY_VER \
-    && pip3 install -U pip \
-    && pip3 install pipenv
+    && pyenv global $PY_VER
+
+# install package
+RUN . /root/init.sh \
+    && pip3 install -U pip setuptools certifi \
+    && pip3 install jupyterlab matplotlib numpy scipy pandas tensorflow-gpu==2.0.0rc1 scikit-learn pillow mglearn pydotplus graphviz
 
 # setup dev environment
 WORKDIR /workspace
 COPY .build/jupyter_notebook_config.py  /root/.jupyter/
-COPY Pipfile Pipfile.lock /workspace/
-RUN . /root/init.sh  \
-    && pipenv install --ignore-pipfile --deploy --python $PY_VER --sequential \
-    && pipenv install --ignore-pipfile --deploy
+ENV TF_FORCE_GPU_ALLOW_GROWTH=true
+CMD [ "/bin/bash", "-ic", "/root/start.sh" ]
